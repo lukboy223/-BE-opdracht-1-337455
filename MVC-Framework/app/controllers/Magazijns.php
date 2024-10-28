@@ -48,6 +48,20 @@ class Magazijns extends BaseController
 
         if (empty($products)) {
             $this->indexError("Geen informatie gevonden met dat product Id.");
+        } else if ($Aantal == 0) {
+            $data = [
+                "LeverancierNaam"       => $products[0]->LeverancierNaam,
+                "ContactPersoon"        => $products[0]->ContactPersoon,
+                "LeverancierNummer"     => $products[0]->LeverancierNummer,
+                "Mobiel"                => $products[0]->Mobiel,
+                "Products"              => $products,
+                'message'               => "Er is van dit product op dit moment geen voorraad aanwezig, de verwachte eerstvolgende levering is: " . $products[0]->DatumEerstVolgendeLevering,
+                'messageColor'          => 'alert-danger',
+                'messageVisibility'     => 'flex'
+            ];
+            $this->view('Magazijns/viewLeverancier', $data);
+
+            header('Refresh:4;' .  URLROOT . '/Magazijns/index');
         } else {
             echo $Aantal;
             $data = [
