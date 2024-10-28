@@ -75,7 +75,6 @@ class Magazijns extends BaseController
                 'messageVisibility'     => 'none'
             ];
             $this->view('Magazijns/viewLeverancier', $data);
-            //9
         }
     }
 
