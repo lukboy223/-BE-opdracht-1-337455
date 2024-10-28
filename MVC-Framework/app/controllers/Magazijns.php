@@ -41,4 +41,27 @@ class Magazijns extends BaseController
         $this->view('magazijns/index', $data);
     }
 
+    public function viewLeverancier($id = 0, $Aantal = null)
+    {
+
+        $products = $this->magaijnModel->ReadProductLeverancierById($id);
+
+        if (empty($products)) {
+            $this->indexError("Geen informatie gevonden met dat product Id.");
+        } else {
+            echo $Aantal;
+            $data = [
+                "LeverancierNaam"       => $products[0]->LeverancierNaam,
+                "ContactPersoon"        => $products[0]->ContactPersoon,
+                "LeverancierNummer"     => $products[0]->LeverancierNummer,
+                "Mobiel"                => $products[0]->Mobiel,
+                "Products"              => $products,
+                'message'               => '0',
+                'messageColor'          => '',
+                'messageVisibility'     => 'none'
+            ];
+            $this->view('Magazijns/viewLeverancier', $data);
+        }
+    }
+
 }
